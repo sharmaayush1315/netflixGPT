@@ -2,6 +2,9 @@
 
 - Getting started create-react-app
 - Configure Tailwind
+- Login component
+  - Build Header
+  - Login form
 
 # Components
 
