@@ -5,6 +5,7 @@
 - Login component
   - Build Header
   - Login form
+  - Sign Up form
 
 # Components
 
