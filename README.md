@@ -2,10 +2,13 @@
 
 - Getting started create-react-app
 - Configure Tailwind
+- Routing configured
 - Login component
   - Build Header
   - Login form
   - Sign Up form
+  - Form validation
+  - useRef introduced
 
 # Components
 
