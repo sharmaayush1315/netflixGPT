@@ -1,33 +1,47 @@
-import { signOut } from 'firebase/auth';
-import React from 'react';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import React, { useEffect } from 'react';
 import { auth } from '../utils/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser, removeUser } from '../utils/userSlice';
+import { signIn, signOut as signout } from '../utils/authSlice';
+import { NETFLIX_LOGO, USER_AVATAR } from '../utils/constants';
 
 const Header = () => {
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const handleSignout = () => {
 		signOut(auth)
-			.then(() => {
-				navigate('/');
-			})
+			.then(() => {})
 			.catch((error) => {
-				navigate('/error');
+				console.log(error);
 			});
 	};
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			if (user) {
+				const { uid, displayName, email } = user;
+				dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
+				dispatch(signIn());
+				navigate('/browse');
+			} else {
+				dispatch(signout());
+				dispatch(removeUser());
+				navigate('/');
+			}
+		});
+		return () => unsubscribe();
+	}, []);
 	return (
 		<div className="w-screen px-8 py-2 absolute bg-gradient-to-b from-black z-10 flex justify-between">
-			<img
-				className="w-56"
-				src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-				alt="Netflix-logo"
-			/>
+			<img className="w-56" src={NETFLIX_LOGO} alt="Netflix-logo" />
 			{isAuthenticated && (
 				<div className="flex m-4 items-center">
 					<img
 						className=" w-14 h-14 object-cover rounded-md shadow-lg"
-						src="https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABcdk1iCbqnp0L9eChv7Q8IHGZ2WTy26xTot4zHhnhnjjBiVicIkUNo9qBqvdD49rOnefHYhJ_ghofRGnfHobQ87SzOh_J4E.png?r=a4f"
+						src={USER_AVATAR}
 						alt="signed in user icon"
 					/>
 					<span

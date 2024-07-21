@@ -7,14 +7,13 @@ import {
 	signInWithEmailAndPassword,
 	updateProfile,
 } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { NETFLIX_BG } from '../utils/constants';
 
 const Login = () => {
 	const [isSignIn, setIsSignIn] = useState(true);
 	const [errorMessage, setErrorMessage] = useState(null);
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const fullName = useRef(null);
 	const email = useRef(null);
@@ -46,11 +45,8 @@ const Login = () => {
 							dispatch(
 								addUser({ uid: uid, email: email, displayName: displayName })
 							);
-							navigate('/browse');
 						})
-						.catch((error) => {
-							navigate('/error');
-						});
+						.catch((error) => {});
 				})
 				.catch((error) => {
 					const errorCode = error.code;
@@ -66,7 +62,6 @@ const Login = () => {
 				.then((userCredential) => {
 					const user = userCredential.user;
 					console.log(user);
-					navigate('/browse');
 				})
 				.catch((error) => {
 					const errorCode = error.code;
@@ -81,7 +76,7 @@ const Login = () => {
 			<div className=" flex-grow relative ">
 				<img
 					className="w-full h-full object-cover"
-					src="https://assets.nflxext.com/ffe/siteui/vlv3/8728e059-7686-4d2d-a67a-84872bd71025/e90516bd-6925-4341-a6cf-0b9f3d0c140a/IN-en-20240708-POP_SIGNUP_TWO_WEEKS-perspective_WEB_34324b52-d094-482b-8c2a-708dc64c9065_small.jpg"
+					src={NETFLIX_BG}
 					alt="Netflix-background-image"
 				/>
 				<form
@@ -122,7 +117,7 @@ const Login = () => {
 							{isSignIn ? 'Sign In' : 'Sign Up'}
 						</button>
 
-						<p className="text-white m-4	 text-gray-300">
+						<p className="text-white m-4 text-gray-300">
 							{isSignIn ? 'New to NetflixGPT?' : 'Already registered?'}
 							<span
 								className="cursor-pointer ml-1 text-[1.25rem]  text-white font-semibold hover:underline"
