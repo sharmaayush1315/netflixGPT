@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
 import { signIn, signOut as signout } from '../utils/authSlice';
-import { NETFLIX_LOGO, USER_AVATAR } from '../utils/constants';
+import { LOGO, USER_AVATAR } from '../utils/constants';
 
 const Header = () => {
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -36,7 +36,7 @@ const Header = () => {
 	}, []);
 	return (
 		<div className="w-screen px-8 py-2 absolute bg-gradient-to-b from-black z-10 flex justify-between">
-			<img className="w-56" src={NETFLIX_LOGO} alt="Netflix-logo" />
+			<img className="w-56" src={LOGO} alt="logo" />
 			{isAuthenticated && (
 				<div className="flex m-4 items-center">
 					<img

@@ -9,7 +9,7 @@ import {
 } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
-import { NETFLIX_BG } from '../utils/constants';
+import { BACKGROUND_IMAGE } from '../utils/constants';
 
 const Login = () => {
 	const [isSignIn, setIsSignIn] = useState(true);
@@ -76,8 +76,8 @@ const Login = () => {
 			<div className=" flex-grow relative ">
 				<img
 					className="w-full h-full object-cover"
-					src={NETFLIX_BG}
-					alt="Netflix-background-image"
+					src={BACKGROUND_IMAGE}
+					alt="background-image"
 				/>
 				<form
 					onSubmit={(e) => e.preventDefault()}
@@ -118,7 +118,7 @@ const Login = () => {
 						</button>
 
 						<p className="text-white m-4 text-gray-300">
-							{isSignIn ? 'New to NetflixGPT?' : 'Already registered?'}
+							{isSignIn ? 'New to GPT?' : 'Already registered?'}
 							<span
 								className="cursor-pointer ml-1 text-[1.25rem]  text-white font-semibold hover:underline"
 								onClick={toggleForm}
