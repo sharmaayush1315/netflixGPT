@@ -6,13 +6,12 @@ import VideoData from './VideoData';
 const MainContent = () => {
 	const movies = useSelector((state) => state.movies?.nowPlayingMovies);
 	if (!movies) return;
-	const mainMovie = movies[0];
-	console.log(mainMovie);
-	const { original_title, overview } = mainMovie;
+	const mainMovie = movies[2];
+	const { original_title, overview, id } = mainMovie;
 	return (
-		<div>
+		<div className="">
 			<VideoData movieTitle={original_title} description={overview} />
-			<VideoPlayer />
+			<VideoPlayer id={id} />
 		</div>
 	);
 };

@@ -35,7 +35,7 @@ const Header = () => {
 		return () => unsubscribe();
 	}, []);
 	return (
-		<div className="w-screen px-8 py-2 absolute bg-gradient-to-b from-black z-10 flex justify-between">
+		<div className="w-screen px-8 py-2 absolute bg-gradient-to-b from-black z-10 flex justify-between ">
 			<img className="w-56" src={LOGO} alt="logo" />
 			{isAuthenticated && (
 				<div className="flex m-4 items-center">
@@ -46,7 +46,7 @@ const Header = () => {
 					/>
 					<span
 						onClick={handleSignout}
-						className="p-2 font-semibold text-[1.25rem] cursor-pointer hover:text-gray-600 duration-200"
+						className="p-2 font-semibold text-[1.25rem] text-white cursor-pointer hover:text-gray-400 duration-200"
 					>
 						Sign out
 					</span>
